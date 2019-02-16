@@ -1,0 +1,59 @@
+﻿@page
+@model RazzorPagesExample.Pages.Products.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Product</h2>
+
+<h4>제품 수정 페이지 입니다.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @*@await Component.InvokeAsync("ProductModifyForm", new {id = Model.pId})*@
+
+            <input type="hidden" asp-for="Product.Id" />
+
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ModelName" class="control-label"></label>
+                <textarea asp-for="Product.ModelName" class="form-control" placeholder="Please add your experience here"></textarea>
+                <span asp-validation-for="Product.ModelName" class="text-danger"></span>
+            </div>
+
+           
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">보안문자</label>
+                <input id="SecurityText" name="SecurityText" class="form-control" value="" />
+            </div>
+
+            @await Component.InvokeAsync("SecurityTexts")
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

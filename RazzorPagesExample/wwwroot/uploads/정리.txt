@@ -1,0 +1,63 @@
+Razor
+ - 설정 : Startup.cs - ConfigureServies
+ - 기본페이지 : @page - MVC action
+ - cshtml      - @page @model @addTagHelper
+    cshtml.cs   - <PageName>Model-PageModel (논리적 분리, 데이터 처리)
+     cf. Def : Pages, Inex
+
+기본폼
+ - Startup.cs - AddDbContext< >()
+ - Data - Customer, AppDbContext
+ - Create
+    cshtml - post / input - asp-for / 
+    cs - [Bindproperty] Customer  cf. [BindProperty(SupportsGet = true)] / OnPostAsync (OnGet)
+
+    cf. !ModelState.IsValid [- return Page()] - Add, SaveChangeAsync(), RedirectToPage("..")
+- Index
+   cshtml - Model.Customers / asp-page-handler ="Delete" asp-route-id  [formaction="??id=1&amp;handler=delete"}   cs - IList<Cusktomer>/ OnPostDeleteAsync(int id)
+   cs -  IList<Customer> / OnGetAsync() / OnPostDeleteAsynce()     
+- Edit
+   cshtml - @page "{id:int?}"   - 링크 포함, HTTP404 에러 방지
+   cs - [BindProperty] Customer, OnGetAsync, OnPostAsync - -db.Attach(Customer).State = EntityState.Modified;
+
+필요한 페이지 속성 - [Required(ErrorMesage = " .." ] 
+
+OnGet Handdler 사용하여 Head 요청 관리
+  - OnHead() -> OnGet ()
+  - Startup.cs - .SetCompatibilityVersion / AllowMappingHeadRequestsToGetHandler
+
+XSRF / CSRF - 위조 방지 토큰 및 유효성 검사 자동
+
+Layoutas, Partials, Templates, Tag Helpers
+  - Pages/Shared/_Layout.cshtml //  Pages / _ViewStart.cshtml 
+  - Pages/_ViewImports.cshtml  @namespace @addTagHelper
+    cshtml / cs는 동일하 NS 가져야 함
+ - Pages/ _ValidationScriptsPartiaal.cshtml
+
+페이지에 대한 URL 생성
+  - Url.Page("/Index", ..) / <a asp-page="/Index"> / RedirectToPage("/Index")
+  - 상대적 경로
+
+ViewData
+ - About.cshtml.cs - [ViewData] Title
+ - About.cshtml - @Model.Title
+ - _Layout - @ViewData["Title"]
+
+TempData
+ - Create.cshtml.cs - [TempData] Message / OnPostAsync() - Message= $"..."
+ - Index.cshtml - @Model.Message
+ - Index.cshtml.cs = [TempData] Message
+
+Two Page Handdler
+  - cshtml - asp-page-handler="JoinList" / asp-page-handler="JoinListUC"
+  - cs - OnpostJoinListAsync() / OnPostJoinListUCAsync() { return await OnPostJoinListAsync(); }
+
+사용자 지정경로
+  - @page "/Some/Other/Path" / @page "item" / @page "{id}"
+   (~) 루트 상대 경로           /  @page "{handler?}" / 
+
+구성 및 설정
+
+       
+
+

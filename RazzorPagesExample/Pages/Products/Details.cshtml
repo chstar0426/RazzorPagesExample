@@ -1,0 +1,60 @@
+﻿@page
+@model RazzorPagesExample.Pages.Products.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.ModelName)
+        </dt>
+        <dd>
+            1 @Html.Raw(Model.Product.ModelName) <br/>
+            2 @Library.HtmlUtility.EncodeWithTabAndSpace(Model.Product.ModelName)  <br />
+            3 @Model.Product.ModelName.Replace("\r\n", "<br />") <br />
+            4 @Html.Raw(Model.Product.ModelName.Replace("\r\n", "<br />")) <br />
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.AttachFile)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.AttachFile)
+            @if (Library.BoardLibrary.IsPhoto(Model.Product.AttachFile))
+            {
+                <br /><br />
+                <img src="/Products/ImageDown?FileName=@Model.Product.AttachFile" class="img-fluid rounded" />
+                <br /><br />
+                <img src="/Products/ThumbNail?FileName=ag.jpg" />
+               
+                <img src="/Products/ThumbNail?FileName=ag.jpg&Width=200&Height=200" />
+                <img src="/Products/ThumbNail?FileName=ag.jpg&Width=300&Height=400" />
+
+            }
+
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Product.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
+

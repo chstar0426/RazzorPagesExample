@@ -1,0 +1,17 @@
+﻿@model List<RazzorPagesExample.Model.Product>
+
+<table class="table table-bordered table-condensed">
+
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@item.Id</td>
+        <td>@item.ModelName</td>
+        <td>@item.Name</td>
+        <td>@item.Price</td>
+    </tr>
+    }
+       
+
+    </table>

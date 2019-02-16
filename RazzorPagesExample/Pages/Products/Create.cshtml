@@ -1,0 +1,153 @@
+﻿@page
+@model RazzorPagesExample.Pages.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Product</h2>
+
+<h4>제품 등록 페이지 입니다.</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form method="post" enctype="multipart/form-data" id="frm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ModelName" class="control-label"></label>
+                <input asp-for="Product.ModelName" class="form-control" />
+                <span asp-validation-for="Product.ModelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">보안문자</label>
+                <input id="SecurityText" name="SecurityText" class="form-control" value="" />
+            </div>
+
+            @await Component.InvokeAsync("SecurityTexts")
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+
+
+            <input type="file" name="files" id="files" multiple style="border:1px solid red; display:none;" @*accept="image/*" *@ />
+            <div class="btn-group btn-group-sm" role="group">
+                <input type="button" value="Browse..." onclick="document.getElementById('files').click();" class="btn btn-primary">
+                <input type="button" value="초기화" onclick="fileReset();" class="btn btn-secondary" />
+                <input type="button" value="submit" class="btn btn-danger" onclick="btn_submit()" />
+            </div>
+            <img src="~/images/imgload.gif" style="display:none" id="loadimg" />
+
+            <br />
+            <div id="selectedFiles"></div>
+        </form>
+    </div>
+   
+
+ </div>
+
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        var selDiv = "";
+
+        document.addEventListener("DOMContentLoaded", init, false);
+
+        function init() {
+            document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+            selDiv = document.querySelector("#selectedFiles");
+        }
+
+        function fileReset() {
+            clearFileInput(); selDiv.innerHTML = "";
+        };
+
+
+        function handleFileSelect(e) {
+
+            
+
+            if (!e.target.files) return;
+
+            selDiv.innerHTML = "";
+
+            var files = e.target.files;
+            var totfiles = 0;
+
+            for (var i = 0; i < files.length; i++) {
+
+                var f = files[i];
+
+                selDiv.innerHTML += f.name + " / " + (f.size / 1024000).toFixed(2) + ' MB' + " Mbyte" + "<br /><br />";
+
+                totfiles = totfiles + f.size;
+
+            }
+
+            //alert(totfiles);
+
+            if (totfiles > 200000000) {
+                alert("전체 저장 용량(200MB)을 초과 하였습니다.");
+                selDiv.innerHTML = "";
+                clearFileInput();
+            }
+
+        }
+
+
+        function clearFileInput() {
+
+            var oldInput = document.querySelector('#files');
+
+            var newInput = document.createElement("input");
+
+            newInput.type = "file";
+            newInput.id = oldInput.id;
+            newInput.name = oldInput.name;
+            newInput.multiple = true;
+            newInput.className = oldInput.className;
+            newInput.style.cssText = oldInput.style.cssText;
+            // copy any other relevant attributes
+
+            oldInput.parentNode.replaceChild(newInput, oldInput);
+
+            document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+
+        }
+
+        function btn_submit() {
+
+            if (document.querySelector('#files').files.length > 0) {
+                document.getElementById('loadimg').style.display = "inline";
+                frm.submit();
+            }
+
+        }
+    </script>
+}
+
+

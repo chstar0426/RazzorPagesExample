@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RazzorPagesExample</title>
+
+    @*<environment include="Development">
+                    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+                    <link rel="stylesheet" href="~/css/site.css" />
+                </environment>
+                <environment exclude="Development">
+                    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+                          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                          asp-fallback-test-class="sr-o
+        nly" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+                    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+                </environment>*@
+    <link href="/Dashboard/node_modules/coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="/Dashboard/node_modules/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/Dashboard/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/Dashboard/node_modules/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="/Dashboard/css/style.css" rel="stylesheet">
+    <link href="/Dashboard/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+</head>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+    <header class="app-header navbar">
+        <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img class="navbar-brand-full" src="/Dashboard/img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
+            <img class="navbar-brand-minimized" src="/Dashboard/img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
+        </a>
+        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <ul class="nav navbar-nav d-md-down-none">
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">Users</a>
+            </li>
+            <li class="nav-item px-3">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item d-md-down-none">
+                <a class="nav-link" href="#">
+                    <i class="icon-bell"></i>
+                    <span class="badge badge-pill badge-danger">5</span>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <img class="img-avatar" src="/Dashboard/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header text-center">
+                        <strong>Account</strong>
+                    </div>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-bell-o"></i> Updates
+                        <span class="badge badge-info">42</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-envelope-o"></i> Messages
+                        <span class="badge badge-success">42</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-tasks"></i> Tasks
+                        <span class="badge badge-danger">42</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-comments"></i> Comments
+                        <span class="badge badge-warning">42</span>
+                    </a>
+                    <div class="dropdown-header text-center">
+                        <strong>Settings</strong>
+                    </div>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-user"></i> Profile
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-wrench"></i> Settings
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-usd"></i> Payments
+                        <span class="badge badge-secondary">42</span>
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-file"></i> Projects
+                        <span class="badge badge-primary">42</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-shield"></i> Lock Account
+                    </a>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa fa-lock"></i> Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <button class="navbar-toggler aside-menu-toggler d-lg-none" type="button" data-toggle="aside-menu-show">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </header>
+
+    
+    <div class="app-body">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class="nav-icon icon-speedometer"></i> 메인화면
+                            <span class="badge badge-primary">M</span>
+                        </a>
+                    </li>
+                  
+
+                    <li class="nav-title">제품안내</li>
+
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="nav-icon icon-puzzle"></i> Product
+                        </a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Products/Index?Page=1">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<i class="nav-icon icon-puzzle"></i>Index
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Products/IndexProduct">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<i class="nav-icon icon-puzzle"></i> IndexProduct
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="nav-title">Extras</li>
+                    <li class="nav-item mt-auto">
+                        <a class="nav-link nav-link-success" href="https://coreui.io" target="_top">
+                            <i class="nav-icon icon-cloud-download"></i> Download CoreUI
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+        </div>
+        <main class="main">
+            <!-- Breadcrumb-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item">
+                    <a href="#">Admin</a>
+                </li>
+                <li class="breadcrumb-item active">Dashboard</li>
+                <!-- Breadcrumb Menu-->
+                <li class="breadcrumb-menu d-md-down-none">
+                    <div class="btn-group" role="group" aria-label="Button group">
+                        <a class="btn" href="#">
+                            <i class="icon-settings"></i>Settings
+                        </a>
+                    </div>
+                </li>
+            </ol>
+            <div class="container-fluid">
+                <div class="animated fadeIn">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col-->
+                        
+                        <!-- /.col-->
+                    </div>
+                       
+                    </div>
+                </div>
+        </main>
+        <aside class="aside-menu">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">
+                        <i class="icon-list"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- Tab panes-->
+            <div class="tab-content">
+                <div class="tab-pane active" id="timeline" role="tabpanel">
+                    <div class="list-group list-group-accent">
+                        <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Today</div>
+                        <div class="list-group-item list-group-item-accent-warning list-group-item-divider">
+                            <div class="avatar float-right">
+                                <img class="img-avatar" src="/Dashboard/img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
+                            </div>
+                            <div>
+                                Meeting with
+                                <strong>Lucas</strong>
+                            </div>
+                            <small class="text-muted mr-3">
+                                <i class="icon-calendar"></i>  1 - 3pm
+                            </small>
+                            <small class="text-muted">
+                                <i class="icon-location-pin"></i>  Palo Alto, CA
+                            </small>
+                        </div>
+                        <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small">Tomorrow</div>
+                        <div class="list-group-item list-group-item-accent-danger list-group-item-divider">
+                            <div>
+                                New UI Project -
+                                <strong>deadline</strong>
+                            </div>
+                            <small class="text-muted mr-3">
+                                <i class="icon-calendar"></i>  10 - 11pm
+                            </small>
+                            <small class="text-muted">
+                                <i class="icon-home"></i>  creativeLabs HQ
+                            </small>
+                            <div class="avatars-stack mt-2">
+                                <div class="avatar avatar-xs">
+                                    <img class="img-avatar" src="/Dashboard/img/avatars/2.jpg" alt="admin@bootstrapmaster.com">
+                                </div>
+                                <div class="avatar avatar-xs">
+                                    <img class="img-avatar" src="/Dashboard/img/avatars/3.jpg" alt="admin@bootstrapmaster.com">
+                                </div>
+                                <div class="avatar avatar-xs">
+                                    <img class="img-avatar" src="/Dashboard/img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+                                </div>
+                                <div class="avatar avatar-xs">
+                                    <img class="img-avatar" src="/Dashboard/img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
+                                </div>
+                                <div class="avatar avatar-xs">
+                                    <img class="img-avatar" src="/Dashboard/img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+    </div>
+
+    <footer class="app-footer">
+        <div>
+            <a href="https://coreui.io">CoreUI</a>
+            @await  Component.InvokeAsync("Copyright")
+            @*<span>&copy; 2018 creativeLabs.</span>*@
+        </div>
+        <div class="ml-auto">
+            <span>Powered by</span>
+            <a href="https://coreui.io">CoreUI</a>
+        </div>
+    </footer>
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="/Dashboard/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/Dashboard/node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/Dashboard/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/Dashboard/node_modules/pace-progress/pace.min.js"></script>
+    <script src="/Dashboard/node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+    <script src="/Dashboard/node_modules/coreui/coreui/dist/js/coreui.min.js"></script>
+
+    @*<environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>*@
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

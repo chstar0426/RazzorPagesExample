@@ -1,0 +1,95 @@
+﻿@page
+@model RazzorPagesExample.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "IndexProduct";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IProducts[0].Name)
+
+            <th>
+
+                @Html.DisplayNameFor(model => model.IProducts[0].AttachFile)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IProducts[0].Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.IProducts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.Raw(Library.BoardLibrary.FuncNew(DateTime.Now))
+                    @Html.Raw(Library.BoardLibrary.ShowCommentCount(6))
+                </td>
+                <td>
+                    @*데이터베이스는 Model, 클래스는 ModelName으로 정의 되어 있어 보이지 않음*@
+                    @*@Html.DisplayFor(modelItem => item.ModelName)*@
+
+                    @*<%# Dul.BoardLibrary.FuncFileDownSingle(Convert.ToInt32(Eval("Id")), Eval("FileName").ToString(), Eval("FileSize").ToString(), "Answers") %>
+                        @Library.BoardLibrary.FuncFileDownSingle()*@
+
+                    @if (!string.IsNullOrEmpty(item.AttachFile))
+                    {
+                        @Html.Raw(Library.BoardLibrary.FuncFileDownSingle(item.Id, item.AttachFile, "1", "Products"));
+
+                    }
+
+                    @*<a asp-page="Download"
+                           asp-route-Id="@item.AttachFile">
+                            @item.AttachFile
+                        </a>*@
+
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <paging url="@HttpContext.Request.Path"
+            page-index="@Model.PageIndex"
+            page-size=2
+            page-etc=""
+            record-count=@Model.TotalCount
+            page-counter=5
+            search-mode = '@Convert.ToBoolean(Model.SearchMode)'
+            search-field='@Library.SqlUtility.EncodeSqlString(HttpContext.Request.Query["SearchField"].ToString())'
+            search-query='@Library.SqlUtility.EncodeSqlString(HttpContext.Request.Query["SearchQuery"].ToString())'>
+    </paging>
+</div>
+
+<hr />
+<div class="text-center">
+    @await Component.InvokeAsync("Searching", Model.SearchMode)
+
+</div>
+<hr />
+컴포넌트를 사용한 나타냄
+
+@await Component.InvokeAsync("ProductList")
+
+@Model.cookieValue

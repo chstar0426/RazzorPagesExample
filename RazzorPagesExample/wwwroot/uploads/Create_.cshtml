@@ -1,0 +1,40 @@
+﻿@page
+@model RazzorPagesExample.Pages.Products.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Product</h2>
+
+<h4>제품 등록 페이지 입니다.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @await Component.InvokeAsync("ProductModifyForm")
+
+            @*<div class="form-group">
+            <label class="control-label">보안문자</label>
+            <input id="SecurityText" name="SecurityText" class="form-control" value="" />
+        </div>
+
+        @await Component.InvokeAsync("SecurityTexts")*@
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
