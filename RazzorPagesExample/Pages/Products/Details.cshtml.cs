@@ -12,23 +12,26 @@ namespace RazzorPagesExample.Pages.Products
 {
     public class DetailsModel : PageModel
     {
-        private readonly RazzorPagesExample.Models.RazzorPagesExampleContext _context;
+        private readonly IProductRazorRepository<Product> _repo;
 
-        public DetailsModel(RazzorPagesExample.Models.RazzorPagesExampleContext context)
+        public DetailsModel(IProductRazorRepository<Product> repo)
         {
-            _context = context;
+            _repo = repo;
+            
         }
 
         public Product Product { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            
             if (id == null)
             {
                 return NotFound();
             }
-
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
+            
+            
+            Product = await _repo.SingleProduct((int)id);
 
             if (Product == null)
             {

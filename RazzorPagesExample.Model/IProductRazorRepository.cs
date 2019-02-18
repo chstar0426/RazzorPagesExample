@@ -13,7 +13,7 @@ namespace RazzorPagesExample.Model
 
         Task<IList<Product>> PagingAsync(IQueryable<Product> product, int pageIndex, int pageSize);
 
-        
+        Task<Product> SingleProduct(int id);
     }
 
 }

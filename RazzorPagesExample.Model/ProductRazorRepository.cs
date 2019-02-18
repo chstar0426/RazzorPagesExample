@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +30,13 @@ namespace RazzorPagesExample.Model
             return from p in _context.Product select p;
 
         }
+
+        
+        public async Task<Product> SingleProduct(int id)
+        {
+            return await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
+
+        }
+       
     }
 }
