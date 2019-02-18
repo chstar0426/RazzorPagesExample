@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace RazzorPagesExample.Model
 {
@@ -58,8 +58,11 @@ namespace RazzorPagesExample.Model
         {
             throw new NotImplementedException();
         }
-  
 
-   
+        
+        Task<IList<Product>> IBasicInterface<Product>.PagingAsync(IQueryable<Product> product, int pageIndex, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

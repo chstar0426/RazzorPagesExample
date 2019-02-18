@@ -15,13 +15,13 @@ namespace RazzorPagesExample.Pages.Products
 {
     public class IndexModel : PageModel
     {
-
-        private readonly RazzorPagesExampleContext _context;
+        private readonly IProductRazorRepository<Product> _repo;
+        
         private readonly IHostingEnvironment _host;
 
-        public IndexModel(RazzorPagesExampleContext context, IHostingEnvironment host)
+        public IndexModel(IProductRazorRepository<Product> repo, IHostingEnvironment host)
         {
-            _context = context;
+            _repo = repo;
             _host = host;
         }
         
@@ -37,10 +37,7 @@ namespace RazzorPagesExample.Pages.Products
         #region 검색관련 변수
         public bool SearchMode { get; set; } = false;
         #endregion
-
-
-
-
+        
 
         public async Task OnGetAsync()
         {
@@ -61,7 +58,7 @@ namespace RazzorPagesExample.Pages.Products
             }
             #endregion
 
-            IQueryable<Product> products = from p in _context.Product select p;
+            IQueryable<Product> products = _repo.ProductList();
 
             if (SearchMode==true)
             {
@@ -104,9 +101,11 @@ namespace RazzorPagesExample.Pages.Products
                 
 
             }
-            
-            IProducts = await products.OrderByDescending(p => p.Id)
-                .Skip((pageIndex) * pageSize).Take(pageSize).ToListAsync();
+
+            //IProducts = await products.OrderByDescending(p => p.Id)
+            //    .Skip((pageIndex) * pageSize).Take(pageSize).ToListAsync();
+
+            IProducts = await _repo.PagingAsync(products, pageIndex, pageSize);
 
             TotalCount = products.Count();
 

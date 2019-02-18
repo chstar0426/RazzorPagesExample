@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace RazzorPagesExample.Model
 {
@@ -26,5 +28,8 @@ namespace RazzorPagesExample.Model
         IEnumerable<T> Ordering(OrderOption orderOption);
 
         List<T> Paging(int pageNumber, int pageSize);
+
+        Task<IList<Product>> PagingAsync(IQueryable<Product> product, int pageIndex, int pageSize);
+        
     }
 }

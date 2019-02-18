@@ -9,14 +9,7 @@ namespace RazzorPagesExample.ViewComponents
 {
     public class SearchingViewComponent : ViewComponent
     {
-        private readonly RazzorPagesExampleContext _context;
-
-        public SearchingViewComponent(RazzorPagesExampleContext context)
-        {
-            _context = context;
-
-        }
-
+       
         public  IViewComponentResult Invoke(bool complate)
         {
             return View(complate);

@@ -49,9 +49,18 @@ namespace RazzorPagesExample
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
+
            
             services.AddSingleton<string>(Configuration.GetConnectionString("RazzorPagesExampleContext"));
             services.AddTransient<IProductRepository, ProductRepository>();
+
+            services.AddTransient<IProductRazorRepository<Product>, ProductRazorRepository>();
+
+
+
+
+            services.AddDbContext<dbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("RazzorPagesExampleContext")));
 
             services.AddDbContext<RazzorPagesExampleContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("RazzorPagesExampleContext")));
